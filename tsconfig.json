@@ -6,6 +6,9 @@
     "outDir": "./dist",
     "strict": true
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "node_modules/ts-jest/globals.d.ts",
+  ],
   "exclude": ["node_modules", "**/__tests__/*"]
 }

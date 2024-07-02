@@ -39,9 +39,7 @@ export class Xtream {
      */
     async getProfiles():Promise<Profile> {
         const response = await fetch(`${this.#buildUrl}get_user_info`);
-        if(response.status !== 200) {
-            throw new Error('Credentials must be invalid');
-        }
+        await this.#handleErrors(response);
         return await response.json();
     }
 
@@ -51,6 +49,7 @@ export class Xtream {
      */
     async getLiveStreams():Promise<LiveStream[]> {
         const response = await fetch(`${this.#buildUrl}get_live_streams`);
+        await this.#handleErrors(response);
         return await response.json();
     }
 
@@ -60,6 +59,7 @@ export class Xtream {
      */
     async getVODStreams():Promise<VOD[]> {
         const response = await fetch(`${this.#buildUrl}get_vod_streams`);
+        await this.#handleErrors(response);
         const data:VOD[] = await response.json();
         data.map((item:VOD) => {
             item.url = `${this.#baseUrl}movie/${this.#username}/${this.#password}/${item.stream_id}.${item.container_extension}`
@@ -73,6 +73,7 @@ export class Xtream {
      */
     async getSeries():Promise<Serie[]> {
         const response = await fetch(`${this.#buildUrl}get_series`);
+        await this.#handleErrors(response);
         return await response.json();
     }
 
@@ -82,6 +83,7 @@ export class Xtream {
      */
     async getCategories():Promise<Category[]> {
         const response = await fetch(`${this.#buildUrl}get_live_categories`);
+        await this.#handleErrors(response);
         return await response.json();
     }
 
@@ -92,8 +94,9 @@ export class Xtream {
      */
     async getEPG() {
         throw new Error('Method not implemented')
-        const response = await fetch(`${this.#baseUrl}/xmltv.php?username=${this.#username}&password=${this.#password}`);
-        return await response.json();
+        /*const response = await fetch(`${this.#baseUrl}/xmltv.php?username=${this.#username}&password=${this.#password}`);
+        await this.handleErrors(response);
+        return await response.json();*/
     }
 
     /**
@@ -102,6 +105,7 @@ export class Xtream {
      */
     async getServerInfo():Promise<Profile> {
         const response = await fetch(`${this.#buildUrl}get_server_info`);
+        await this.#handleErrors(response);
         return await response.json();
     }
 
@@ -111,6 +115,14 @@ export class Xtream {
      */
     async getUserInfo():Promise<Profile> {
         const response = await fetch(`${this.#buildUrl}get_user_info`);
+        await this.#handleErrors(response);
         return await response.json();
+    }
+
+    async #handleErrors(response:Response) {
+        if(!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return response
     }
 }
