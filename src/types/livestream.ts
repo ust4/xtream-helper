@@ -13,4 +13,5 @@ export type LiveStream = {
     tv_archive: number;
     direct_source: string;
     tv_archive_duration: number;
+    url:string;
 }

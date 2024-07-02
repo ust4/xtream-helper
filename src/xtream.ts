@@ -1,9 +1,8 @@
 import {Profile} from "./types/profile";
 import {LiveStream} from "./types/livestream";
 import {VOD} from "./types/VOD";
-import {Serie} from "./types/serie";
+import {Episode, EpisodeInfo, Serie, SerieInfo} from "./types/serie";
 import {Category} from "./types/category";
-
 /**
  * Xtream class is used to interact with the Xtream API.
  * It provides methods to fetch profiles, live streams, VOD streams, series, categories, EPG, server info and user info.
@@ -50,7 +49,11 @@ export class Xtream {
     async getLiveStreams():Promise<LiveStream[]> {
         const response = await fetch(`${this.#buildUrl}get_live_streams`);
         await this.#handleErrors(response);
-        return await response.json();
+        const data:LiveStream[] = await response.json()
+        data.map((item:LiveStream) => {
+            item.url = `${this.#baseUrl}live/${this.#username}/${this.#password}/${item.stream_id}.ts`
+        });
+        return data;
     }
 
     /**
@@ -74,7 +77,25 @@ export class Xtream {
     async getSeries():Promise<Serie[]> {
         const response = await fetch(`${this.#buildUrl}get_series`);
         await this.#handleErrors(response);
-        return await response.json();
+        const data: Serie[] = await response.json();
+        data.map((item:Serie) => {
+            item.url = `${this.#baseUrl}series/${this.#username}/${this.#password}/${item.series_id}.mp4`
+        });
+        return data;
+    }
+
+    async getSerieInfo(id:number):Promise<SerieInfo | null> {
+        const response = await fetch(`${this.#buildUrl}get_series_info&series_id=${id}`);
+        await this.#handleErrors(response);
+        const data:SerieInfo = await response.json()
+        for (const k in Object.keys(data.episodes)) {
+            if(typeof data.episodes[k] === 'object') {
+                data.episodes[k].map((item:Episode) => {
+                    item.url = `${this.#baseUrl}series/${this.#username}/${this.#password}/${item.id}.${item.container_extension}`
+                });
+            }
+        }
+        return data;
     }
 
     /**
@@ -85,18 +106,6 @@ export class Xtream {
         const response = await fetch(`${this.#buildUrl}get_live_categories`);
         await this.#handleErrors(response);
         return await response.json();
-    }
-
-    /**
-     * Fetches the EPG.
-     * @returns {Promise<any>} A promise that resolves to the EPG.
-     * @throws {Error} Throws an error if the method is not implemented.
-     */
-    async getEPG() {
-        throw new Error('Method not implemented')
-        /*const response = await fetch(`${this.#baseUrl}/xmltv.php?username=${this.#username}&password=${this.#password}`);
-        await this.handleErrors(response);
-        return await response.json();*/
     }
 
     /**
