@@ -1,0 +1,18 @@
+{
+  "name": "xtream-helper",
+  "version": "1.0.8",
+  "description": "",
+  "main": "dist/index.js",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "dev": "npx tsx watch ./src/lul.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.6.0",
+    "typescript": "^5.5.3"
+  }
+}
