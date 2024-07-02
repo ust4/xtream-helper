@@ -36,7 +36,7 @@ export class Xtream {
      * Fetches the user profile.
      * @returns {Promise<Profile>} A promise that resolves to the user profile.
      */
-    async getProfiles():Promise<Profile> {
+    async getProfile():Promise<Profile> {
         const response = await fetch(`${this.#buildUrl}get_user_info`);
         await this.#handleErrors(response);
         return await response.json();
@@ -84,8 +84,13 @@ export class Xtream {
         return data;
     }
 
-    async getSerieInfo(id:number):Promise<SerieInfo | null> {
-        const response = await fetch(`${this.#buildUrl}get_series_info&series_id=${id}`);
+    /**
+     * Fetches the serie info.
+     * @param serie_id
+     * @returns {Promise<SerieInfo>} A promise that resolves to the serie info.
+     */
+    async getSerieInfo(serie_id:number):Promise<SerieInfo> {
+        const response = await fetch(`${this.#buildUrl}get_series_info&series_id=${serie_id}`);
         await this.#handleErrors(response);
         const data:SerieInfo = await response.json()
         for (const k in Object.keys(data.episodes)) {

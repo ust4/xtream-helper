@@ -51,9 +51,9 @@ xtream.getVODStreams().then((vods: VOD[]) => {
 xtream.getVODStreams(): Promise<VOD[]>
 xtream.getLiveStreams(): Promise<Live[]>
 xtream.getCategories(): Promise<Category[]>
-xtream.getEPG(): Promise<EPG[]>
 xtream.getSeries(): Promise<Series[]>
-xtream.getProfiles(): Promise<Profile>
+xtream.getSerieInfo(serie_id: number): Promise<SerieInfo>
+xtream.getProfile(): Promise<Profile>
 xtream.getServerInfo(): Promise<Profile>
 xtream.getUserInfo(): Promise<Profile>
 ```
