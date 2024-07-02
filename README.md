@@ -18,8 +18,9 @@ const xtream = new XtreamHelper({
 });
 
 xtream.getVODStreams().then((vods: VOD[]) => {
-  console.log(vods[54]);
+  console.log(vods);
   /*
+  [
     {
         num: number;
         name: string;
@@ -38,9 +39,23 @@ xtream.getVODStreams().then((vods: VOD[]) => {
         custom_sid: any;
         direct_source: string;
         url:string;
-    }
+    },
+    ...
+    ]
     */
 });
+```
+
+## Functions
+```typescript
+xtream.getVODStreams(): Promise<VOD[]>
+xtream.getLiveStreams(): Promise<Live[]>
+xtream.getCategories(): Promise<Category[]>
+xtream.getEPG(): Promise<EPG[]>
+xtream.getSeries(): Promise<Series[]>
+xtream.getProfiles(): Promise<Profile>
+xtream.getServerInfo(): Promise<Profile>
+xtream.getUserInfo(): Promise<Profile>
 ```
 
 ## That's it!

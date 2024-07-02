@@ -1,15 +1,16 @@
 {
   "name": "xtream-helper",
-  "version": "1.0.8",
-  "description": "",
+  "version": "1.1.0",
+  "description": "This is a simple helper for Xtream Codes IPTV. It allows you to fetch the data from the API and display it in a more readable format.",
   "main": "dist/index.js",
   "private": false,
+  "homepage": "https://github.com/BoboFr/xtream-helper",
   "scripts": {
     "build": "tsc",
     "dev": "npx tsx watch ./src/lul.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["xtream", "helper", "api", "typescript", "ts"],
+  "author": "Gaëtan Biord",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^9.6.0",
