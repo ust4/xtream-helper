@@ -9,7 +9,7 @@ This is a simple helper for Xtream Codes IPTV. It allows you to fetch the data f
 ```typescript
 import { Xtream, VOD } from "xtream-helper";
 
-const xtream = new XtreamHelper({
+const xtream = new Xtream({
   url: "http://your-xtream-codes-url.com:port",
   {
     username: "your-username",
