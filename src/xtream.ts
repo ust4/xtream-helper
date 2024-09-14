@@ -23,9 +23,6 @@ export class Xtream {
       throw new Error("Base URL is required");
     }
     this.#baseUrl = baseUrl.trim();
-    if (!this.#baseUrl.endsWith("/")) {
-      this.#baseUrl += "/";
-    }
     this.#username = auth.username.trim();
     this.#password = auth.password.trim();
 
@@ -39,6 +36,8 @@ export class Xtream {
    * @returns {Promise<Profile>} A promise that resolves to the user profile.
    */
   async getProfile(): Promise<Profile> {
+    console.log(this.#buildUrl);
+
     const response = await fetch(`${this.#buildUrl}get_user_info`, {
       headers: {
         "Content-Type": "application/json",
