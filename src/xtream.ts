@@ -60,7 +60,12 @@ export class Xtream {
     await this.#handleErrors(response);
     const data: LiveStream[] = await response.json();
     data.map((item: LiveStream) => {
-      item.url = `${this.#baseUrl}live/${this.#username}/${this.#password}/${
+      let baseUrl = this.#baseUrl;
+      if (!this.#baseUrl.endsWith("/")) {
+        baseUrl = this.#baseUrl + "/";
+      }
+
+      item.url = `${baseUrl}live/${this.#username}/${this.#password}/${
         item.stream_id
       }.ts`;
     });
@@ -81,7 +86,12 @@ export class Xtream {
     const data: VOD[] = await response.json();
     console.log(response.status);
     data.map((item: VOD) => {
-      item.url = `${this.#baseUrl}movie/${this.#username}/${this.#password}/${
+      let baseUrl = this.#baseUrl;
+      if (!this.#baseUrl.endsWith("/")) {
+        baseUrl = this.#baseUrl + "/";
+      }
+
+      item.url = `${baseUrl}movie/${this.#username}/${this.#password}/${
         item.stream_id
       }.${item.container_extension}`;
     });
@@ -101,7 +111,12 @@ export class Xtream {
     await this.#handleErrors(response);
     const data: Serie[] = await response.json();
     data.map((item: Serie) => {
-      item.url = `${this.#baseUrl}series/${this.#username}/${this.#password}/${
+      let baseUrl = this.#baseUrl;
+      if (!this.#baseUrl.endsWith("/")) {
+        baseUrl = this.#baseUrl + "/";
+      }
+
+      item.url = `${baseUrl}series/${this.#username}/${this.#password}/${
         item.series_id
       }.mp4`;
     });
@@ -127,7 +142,12 @@ export class Xtream {
     for (const k in Object.keys(data.episodes)) {
       if (typeof data.episodes[k] === "object") {
         data.episodes[k].map((item: Episode) => {
-          item.url = `${this.#baseUrl}series/${this.#username}/${
+          let baseUrl = this.#baseUrl;
+          if (!this.#baseUrl.endsWith("/")) {
+            baseUrl = this.#baseUrl + "/";
+          }
+    
+          item.url = `${baseUrl}series/${this.#username}/${
             this.#password
           }/${item.id}.${item.container_extension}`;
         });
