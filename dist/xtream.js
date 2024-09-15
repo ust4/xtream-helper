@@ -76,7 +76,11 @@ class Xtream {
             yield __classPrivateFieldGet(this, _Xtream_instances, "m", _Xtream_handleErrors).call(this, response);
             const data = yield response.json();
             data.map((item) => {
-                item.url = `${__classPrivateFieldGet(this, _Xtream_baseUrl, "f")}live/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.stream_id}.ts`;
+                let baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f");
+                if (!__classPrivateFieldGet(this, _Xtream_baseUrl, "f").endsWith("/")) {
+                    baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f") + "/";
+                }
+                item.url = `${baseUrl}live/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.stream_id}.ts`;
             });
             return data;
         });
@@ -96,7 +100,11 @@ class Xtream {
             const data = yield response.json();
             console.log(response.status);
             data.map((item) => {
-                item.url = `${__classPrivateFieldGet(this, _Xtream_baseUrl, "f")}movie/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.stream_id}.${item.container_extension}`;
+                let baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f");
+                if (!__classPrivateFieldGet(this, _Xtream_baseUrl, "f").endsWith("/")) {
+                    baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f") + "/";
+                }
+                item.url = `${baseUrl}movie/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.stream_id}.${item.container_extension}`;
             });
             return data;
         });
@@ -115,7 +123,11 @@ class Xtream {
             yield __classPrivateFieldGet(this, _Xtream_instances, "m", _Xtream_handleErrors).call(this, response);
             const data = yield response.json();
             data.map((item) => {
-                item.url = `${__classPrivateFieldGet(this, _Xtream_baseUrl, "f")}series/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.series_id}.mp4`;
+                let baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f");
+                if (!__classPrivateFieldGet(this, _Xtream_baseUrl, "f").endsWith("/")) {
+                    baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f") + "/";
+                }
+                item.url = `${baseUrl}series/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.series_id}.mp4`;
             });
             return data;
         });
@@ -137,7 +149,11 @@ class Xtream {
             for (const k in Object.keys(data.episodes)) {
                 if (typeof data.episodes[k] === "object") {
                     data.episodes[k].map((item) => {
-                        item.url = `${__classPrivateFieldGet(this, _Xtream_baseUrl, "f")}series/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.id}.${item.container_extension}`;
+                        let baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f");
+                        if (!__classPrivateFieldGet(this, _Xtream_baseUrl, "f").endsWith("/")) {
+                            baseUrl = __classPrivateFieldGet(this, _Xtream_baseUrl, "f") + "/";
+                        }
+                        item.url = `${baseUrl}series/${__classPrivateFieldGet(this, _Xtream_username, "f")}/${__classPrivateFieldGet(this, _Xtream_password, "f")}/${item.id}.${item.container_extension}`;
                     });
                 }
             }
